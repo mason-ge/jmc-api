@@ -17,4 +17,12 @@ public interface UserService {
 	 * @return
 	 */
 	Bdf2User getUserByMap(Map<String, Object> map);
+
+	/**
+	 * 保存用户
+	 * 
+	 * @param user
+	 * @return
+	 */
+	void saveUser(Bdf2User user);
 }

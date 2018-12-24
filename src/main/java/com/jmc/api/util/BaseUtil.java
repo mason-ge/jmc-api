@@ -1,16 +1,19 @@
 package com.jmc.api.util;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  * @Description: 基础工具类
@@ -191,6 +194,16 @@ public class BaseUtil {
 		}
 	}
 
+	/**
+	 * 获取实体类字段的属性和值
+	 * 
+	 * @param model
+	 * @return
+	 * @throws NoSuchMethodException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	public static Map<String, Object> getClzFieldProperties(Object model)
 			throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		String name, type;
@@ -211,4 +224,63 @@ public class BaseUtil {
 		}
 		return map;
 	}
+
+	/**
+	 * SHA1加密
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String getSha1(String str) {
+
+		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+		try {
+			MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
+			mdTemp.update(str.getBytes(StandardCharsets.UTF_8));
+			byte[] md = mdTemp.digest();
+			int j = md.length;
+			char buf[] = new char[j * 2];
+			int k = 0;
+			for (int i = 0; i < j; i++) {
+				byte byte0 = md[i];
+				buf[k++] = hexDigits[byte0 >>> 4 & 0xf];
+				buf[k++] = hexDigits[byte0 & 0xf];
+			}
+			return new String(buf);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	/**
+	 * 获取bdf2框架的加密密码
+	 * 
+	 * @param psd  明文密码
+	 * @param salt 随机数
+	 * @return
+	 */
+	public static String bdf2Encrypt(String psd, String salt) {
+		return DigestUtils.sha1Hex(psd + "{" + salt + "}");
+	}
+
+	/**
+	 * 获取bdf2框架的加密密码
+	 *
+	 * @param psd 明文密码
+	 * @return
+	 */
+	public static String bdf2Encrypt(String psd) {
+		String salt = String.valueOf(getRandomNum());
+		return DigestUtils.sha1Hex(psd + "{" + salt + "}");
+	}
+
+	/**
+	 * 获取从1-1000的随机整型数
+	 * 
+	 * @return
+	 */
+	public static int getRandomNum() {
+		return (int) (1 + Math.random() * (1000 - 1 + 1));
+	}
+
 }

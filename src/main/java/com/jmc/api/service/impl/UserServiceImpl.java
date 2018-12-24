@@ -1,5 +1,6 @@
 package com.jmc.api.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,18 @@ public class UserServiceImpl extends BaseDao implements UserService {
 			return this.queryEntity(hql, conMap);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public void saveUser(Bdf2User user) {
+		try {
+			user.setCreateDate(new Date());
+			this.save(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 }

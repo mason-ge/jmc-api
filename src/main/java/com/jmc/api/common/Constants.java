@@ -8,4 +8,6 @@ package com.jmc.api.common;
 public class Constants {
 	// 分页每页显示的行数
 	public static int PAGE_SIZE = 15;
+	// 公司ID
+	public static String COMPANY_ID = "ALLOVE";
 }

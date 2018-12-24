@@ -2,10 +2,11 @@ package com.jmc.api.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 /**
- * @Description:
+ * @Description:BDF2用户表
  * @Author: mason_ge
  * @Date: 16:24 2018/12/21
  */
@@ -14,15 +15,15 @@ import java.util.Objects;
 public class Bdf2User {
 	private String username;
 	private String address;
-	private byte administrator;
+	private Integer administrator;
 	private Timestamp birthday;
 	private String cname;
 	private String companyId;
-	private Timestamp createDate;
+	private Date createDate;
 	private String email;
-	private byte enabled;
+	private Integer enabled;
 	private String ename;
-	private byte male;
+	private Integer male;
 	private String mobile;
 	private String password;
 	private String salt;
@@ -38,7 +39,7 @@ public class Bdf2User {
 	}
 
 	@Basic
-	@Column(name = "ADDRESS_", nullable = true, length = 240)
+	@Column(name = "ADDRESS_", length = 240)
 	public String getAddress() {
 		return address;
 	}
@@ -49,16 +50,16 @@ public class Bdf2User {
 
 	@Basic
 	@Column(name = "ADMINISTRATOR_", nullable = false)
-	public byte getAdministrator() {
+	public Integer getAdministrator() {
 		return administrator;
 	}
 
-	public void setAdministrator(byte administrator) {
+	public void setAdministrator(Integer administrator) {
 		this.administrator = administrator;
 	}
 
 	@Basic
-	@Column(name = "BIRTHDAY_", nullable = true)
+	@Column(name = "BIRTHDAY_")
 	public Timestamp getBirthday() {
 		return birthday;
 	}
@@ -88,17 +89,18 @@ public class Bdf2User {
 	}
 
 	@Basic
-	@Column(name = "CREATE_DATE_", nullable = true)
-	public Timestamp getCreateDate() {
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATE_DATE_")
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
 	@Basic
-	@Column(name = "EMAIL_", nullable = true, length = 120)
+	@Column(name = "EMAIL_", length = 120)
 	public String getEmail() {
 		return email;
 	}
@@ -109,16 +111,16 @@ public class Bdf2User {
 
 	@Basic
 	@Column(name = "ENABLED_", nullable = false)
-	public byte getEnabled() {
+	public Integer getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(byte enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
 
 	@Basic
-	@Column(name = "ENAME_", nullable = true, length = 120)
+	@Column(name = "ENAME_", length = 120)
 	public String getEname() {
 		return ename;
 	}
@@ -129,16 +131,16 @@ public class Bdf2User {
 
 	@Basic
 	@Column(name = "MALE_", nullable = false)
-	public byte getMale() {
+	public Integer getMale() {
 		return male;
 	}
 
-	public void setMale(byte male) {
+	public void setMale(Integer male) {
 		this.male = male;
 	}
 
 	@Basic
-	@Column(name = "MOBILE_", nullable = true, length = 40)
+	@Column(name = "MOBILE_", length = 40)
 	public String getMobile() {
 		return mobile;
 	}
