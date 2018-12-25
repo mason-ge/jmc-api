@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jmc.api.common.Constants;
+import com.jmc.api.common.ConstantsParamName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,9 @@ import com.jmc.api.util.BaseUtil;
 public class UserCtrl {
 
 	// 构造器方式注入依赖
+	/**
+	 * 用户服务
+	 */
 	private final UserService userService;
 
 	@Autowired
@@ -35,7 +39,7 @@ public class UserCtrl {
 	}
 
 	/**
-	 * 登录名密码验证
+	 * 登录名密码验证（密码前台经过Base64编码，需要解码,然后加密和数据库的密码比对）
 	 * 
 	 * @param reqBody
 	 * @return
@@ -46,8 +50,9 @@ public class UserCtrl {
 		Map<String, Object> conMap = new HashMap<>(0);
 		Bdf2User user;
 		try {
-			userName = BaseUtil.object2String(reqBody.get("userName"));
-			psd = BaseUtil.object2String(reqBody.get("psd"));
+			userName = BaseUtil.object2String(reqBody.get(ConstantsParamName.USER_NAME));
+			psd = BaseUtil.object2String(reqBody.get(ConstantsParamName.PSD));
+			// 校验必输
 			if (StringUtils.isEmpty(userName)) {
 				return ApiReturnUtil.handleDataWithErro("请传入登录名！");
 			}
@@ -66,7 +71,7 @@ public class UserCtrl {
 			// 取出当前正确的密码(经过SHA1加密的)
 			psdRight = user.getPassword();
 			// 传入的密码解码
-			psd = BaseUtil.Base64Decode(psd);
+			psd = BaseUtil.base64Decode(psd);
 			// 传入的密码加密
 			psd = BaseUtil.bdf2Encrypt(psd, salt);
 			if (!psd.equals(psdRight)) {
@@ -93,13 +98,13 @@ public class UserCtrl {
 		Bdf2User user;
 		try {
 			// 登录名
-			userName = BaseUtil.object2String(reqBody.get("userName"));
+			userName = BaseUtil.object2String(reqBody.get(ConstantsParamName.USER_NAME));
 			// 密码
-			psd = BaseUtil.object2String(reqBody.get("psd"));
+			psd = BaseUtil.object2String(reqBody.get(ConstantsParamName.PSD));
 			// 用户名
-			cname = BaseUtil.object2String(reqBody.get("cname"));
+			cname = BaseUtil.object2String(reqBody.get(ConstantsParamName.C_NAME));
 			// 手机号
-			mobile = BaseUtil.object2String(reqBody.get("mobile"));
+			mobile = BaseUtil.object2String(reqBody.get(ConstantsParamName.MOBILE));
 
 			// 校验必输
 			if (StringUtils.isEmpty(userName)) {
@@ -112,14 +117,13 @@ public class UserCtrl {
 				return ApiReturnUtil.handleDataWithErro("请传入用户名！");
 			}
 			// step 1 :判断用户名是否已存在
-
 			conMap.put("username", userName);
 			user = userService.getUserByMap(conMap);
 			if (user != null) {
 				return ApiReturnUtil.handleDataWithErro("用户已存在！");
 			}
 			// step 2 :密码解码和加密
-			psd = BaseUtil.Base64Decode(psd);
+			psd = BaseUtil.base64Decode(psd);
 			salt = String.valueOf(BaseUtil.getRandomNum());
 			psd = BaseUtil.bdf2Encrypt(psd, salt);
 

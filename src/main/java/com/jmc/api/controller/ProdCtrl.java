@@ -3,6 +3,7 @@ package com.jmc.api.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.jmc.api.common.ConstantsParamName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,9 @@ import com.jmc.api.util.BaseUtil;
 public class ProdCtrl {
 
 	// 构造器方式注入依赖
+	/**
+	 * 商品服务
+	 */
 	private final ProdService prodService;
 
 	@Autowired
@@ -45,13 +49,13 @@ public class ProdCtrl {
 		int pageSize, pageNo;
 		List<Map<String, Object>> list;
 		try {
-			if (reqBody.get("pageSize") != null) {
-				pg.setPageSize(BaseUtil.obj2int(reqBody.get("pageSize")));
+			if (reqBody.get(ConstantsParamName.PAGE_SIZE) != null) {
+				pg.setPageSize(BaseUtil.obj2int(reqBody.get(ConstantsParamName.PAGE_SIZE)));
 			}
-			if (reqBody.get("pageNo") != null) {
-				pg.setPageNo(BaseUtil.obj2int(reqBody.get("pageNo")));
+			if (reqBody.get(ConstantsParamName.PAGE_NO) != null) {
+				pg.setPageNo(BaseUtil.obj2int(reqBody.get(ConstantsParamName.PAGE_NO)));
 			}
-			if (StringUtils.isEmpty(reqBody.get("client"))) {
+			if (StringUtils.isEmpty(reqBody.get(ConstantsParamName.CLIENT))) {
 				return ApiReturnUtil.handleDataWithErro("请传入客户端号");
 			} else {
 				list = prodService.getProdList(reqBody, pg);

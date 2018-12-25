@@ -176,13 +176,13 @@ public class Bdf2User {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Bdf2User bdf2User = (Bdf2User) o;
-		return administrator == bdf2User.administrator && enabled == bdf2User.enabled && male == bdf2User.male
-				&& Objects.equals(username, bdf2User.username) && Objects.equals(address, bdf2User.address)
-				&& Objects.equals(birthday, bdf2User.birthday) && Objects.equals(cname, bdf2User.cname)
-				&& Objects.equals(companyId, bdf2User.companyId) && Objects.equals(createDate, bdf2User.createDate)
-				&& Objects.equals(email, bdf2User.email) && Objects.equals(ename, bdf2User.ename)
-				&& Objects.equals(mobile, bdf2User.mobile) && Objects.equals(password, bdf2User.password)
-				&& Objects.equals(salt, bdf2User.salt);
+		return administrator.equals(bdf2User.administrator) && enabled.equals(bdf2User.enabled)
+				&& male.equals(bdf2User.male) && Objects.equals(username, bdf2User.username)
+				&& Objects.equals(address, bdf2User.address) && Objects.equals(birthday, bdf2User.birthday)
+				&& Objects.equals(cname, bdf2User.cname) && Objects.equals(companyId, bdf2User.companyId)
+				&& Objects.equals(createDate, bdf2User.createDate) && Objects.equals(email, bdf2User.email)
+				&& Objects.equals(ename, bdf2User.ename) && Objects.equals(mobile, bdf2User.mobile)
+				&& Objects.equals(password, bdf2User.password) && Objects.equals(salt, bdf2User.salt);
 	}
 
 	@Override

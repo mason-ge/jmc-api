@@ -23,7 +23,7 @@ import com.jmc.api.util.BaseUtil;
  * @Author: mason_ge
  * @Date: 15:17 2018/12/18
  */
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @SuppressWarnings("unchecked")
 public abstract class BaseDao extends HibernateDaoSupport {
 
@@ -32,7 +32,11 @@ public abstract class BaseDao extends HibernateDaoSupport {
 		super.setSessionFactory(sessionFactory);
 	}
 
-	// 获取Session
+	/**
+	 * 获取Session
+	 * 
+	 * @return
+	 */
 	protected Session getSession() {
 		return Objects.requireNonNull(this.getSessionFactory()).getCurrentSession();
 	}

@@ -407,10 +407,12 @@ public class ProdBase {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 		ProdBase that = (ProdBase) o;
 		return Objects.equals(pkId, that.pkId) && Objects.equals(client, that.client)
 				&& Objects.equals(prodCode, that.prodCode) && Objects.equals(prodName, that.prodName)

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
- * @Description:
+ * @Description:枚举项
  * @Author: mason_ge
  * @Date: 14:30 2018/12/21
  */
@@ -235,33 +235,29 @@ public class SysEnum {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		SysEnum that = (SysEnum) o;
-		return Objects.equals(enumId, that.enumId) &&
-				Objects.equals(enumCode, that.enumCode) &&
-				Objects.equals(enumDesc, that.enumDesc) &&
-				Objects.equals(enumName, that.enumName) &&
-				Objects.equals(enumType, that.enumType) &&
-				Objects.equals(model, that.model) &&
-				Objects.equals(syncDate, that.syncDate) &&
-				Objects.equals(syncFlag, that.syncFlag) &&
-				Objects.equals(updatedBy, that.updatedBy) &&
-				Objects.equals(updatedDate, that.updatedDate) &&
-				Objects.equals(valueFrom, that.valueFrom) &&
-				Objects.equals(version, that.version) &&
-				Objects.equals(attribute1, that.attribute1) &&
-				Objects.equals(attribute2, that.attribute2) &&
-				Objects.equals(attribute3, that.attribute3) &&
-				Objects.equals(attribute4, that.attribute4) &&
-				Objects.equals(attribute5, that.attribute5) &&
-				Objects.equals(createdBy, that.createdBy) &&
-				Objects.equals(createdDate, that.createdDate) &&
-				Objects.equals(deletedFlag, that.deletedFlag);
+		return Objects.equals(enumId, that.enumId) && Objects.equals(enumCode, that.enumCode)
+				&& Objects.equals(enumDesc, that.enumDesc) && Objects.equals(enumName, that.enumName)
+				&& Objects.equals(enumType, that.enumType) && Objects.equals(model, that.model)
+				&& Objects.equals(syncDate, that.syncDate) && Objects.equals(syncFlag, that.syncFlag)
+				&& Objects.equals(updatedBy, that.updatedBy) && Objects.equals(updatedDate, that.updatedDate)
+				&& Objects.equals(valueFrom, that.valueFrom) && Objects.equals(version, that.version)
+				&& Objects.equals(attribute1, that.attribute1) && Objects.equals(attribute2, that.attribute2)
+				&& Objects.equals(attribute3, that.attribute3) && Objects.equals(attribute4, that.attribute4)
+				&& Objects.equals(attribute5, that.attribute5) && Objects.equals(createdBy, that.createdBy)
+				&& Objects.equals(createdDate, that.createdDate) && Objects.equals(deletedFlag, that.deletedFlag);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(enumId, enumCode, enumDesc, enumName, enumType, model, syncDate, syncFlag, updatedBy, updatedDate, valueFrom, version, attribute1, attribute2, attribute3, attribute4, attribute5, createdBy, createdDate, deletedFlag);
+		return Objects.hash(enumId, enumCode, enumDesc, enumName, enumType, model, syncDate, syncFlag, updatedBy,
+				updatedDate, valueFrom, version, attribute1, attribute2, attribute3, attribute4, attribute5, createdBy,
+				createdDate, deletedFlag);
 	}
 }

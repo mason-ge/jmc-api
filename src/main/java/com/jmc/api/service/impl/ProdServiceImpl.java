@@ -1,5 +1,6 @@
 package com.jmc.api.service.impl;
 
+import com.jmc.api.common.Constants;
 import com.jmc.api.common.Page;
 import com.jmc.api.dao.BaseDao;
 import com.jmc.api.service.ProdService;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description:
+ * @Description:商品接口实现
  * @Author: mason_ge
  * @Date: 11:41 2018/12/18
  */
@@ -39,7 +40,7 @@ public class ProdServiceImpl extends BaseDao implements ProdService {
 				// 控制层已经做了控制，客户端号不能为空
 				conMap.put("client", param.get("client"));
 				// 判断是否是所有品类
-				if (!"所有品类".equals(firstCatg)) {
+				if (!Constants.ALL_CATEGORY.equals(firstCatg)) {
 					// 判断是否是一级品类
 					if ("".equals(secCatg) || secCatg == null) {
 						sb.append("and t.first_catg = :firstCatg	");
@@ -54,7 +55,7 @@ public class ProdServiceImpl extends BaseDao implements ProdService {
 			}
 			sb.append(" )TBL where 1=1 ");
 			sb.append("and TBL.img is not null 															 ");
-			sb.append("and TBL.img <> '' 															 ");
+			sb.append("and TBL.img <> '' 															 	 ");
 			return this.queryPageListBySql(sb.toString(), conMap, pg);
 		} catch (Exception e) {
 			e.printStackTrace();

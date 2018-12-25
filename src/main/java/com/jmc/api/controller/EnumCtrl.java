@@ -3,6 +3,7 @@ package com.jmc.api.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.jmc.api.common.ConstantsParamName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ import com.jmc.api.util.BaseUtil;
 public class EnumCtrl {
 
 	// 构造器方式注入依赖
+	/**
+	 * 枚举服务
+	 */
 	private final EnumService enumService;
 
 	@Autowired
@@ -31,7 +35,7 @@ public class EnumCtrl {
 	}
 
 	/**
-	 * 根据品类一级编码获取品类二级列表
+	 * 根据品类一级描述获取品类二级列表
 	 *
 	 * @param reqBody
 	 * @return
@@ -40,7 +44,7 @@ public class EnumCtrl {
 	public ReturnObj getSecCatgByFirstDesc(@RequestBody Map<String, Object> reqBody) {
 		List<SysEnumv> list;
 		try {
-			String enumvDesc = BaseUtil.object2String(reqBody.get("firstDesc"));
+			String enumvDesc = BaseUtil.object2String(reqBody.get(ConstantsParamName.FIRST_DESC));
 			if (StringUtils.isEmpty(enumvDesc)) {
 				return ApiReturnUtil.handleDataWithErro("未传入品类一级描述");
 			}

@@ -6,13 +6,21 @@ package com.jmc.api.common;
  * @Date: 17:56 2018/12/17
  */
 public class ReturnObj {
-	// 返回的数据
+	/**
+	 * 返回的数据
+	 */
 	private Object data;
-	// 返回的code
+	/**
+	 * 返回的code
+	 */
 	private int code;
-	// 返回的信息
+	/**
+	 * 返回的信息
+	 */
 	private String mes;
-	// 返回的分页信息
+	/**
+	 * 返回的分页信息
+	 */
 	private Object page;
 
 	public Object getData() {

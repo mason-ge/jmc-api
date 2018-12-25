@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.jmc.api.common.ConstantsParamName;
 import org.apache.commons.codec.digest.DigestUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -54,7 +55,7 @@ public class BaseUtil {
 	 */
 	private static String convertNull2String(String str) {
 		String res;
-		if (str == null || "null".equals(str.trim())) {
+		if (str == null || ConstantsParamName.NULL.equals(str.trim())) {
 			res = "";
 		} else {
 			res = str.trim();
@@ -167,7 +168,7 @@ public class BaseUtil {
 	 * @param str
 	 * @return
 	 */
-	public static String Base64Encode(String str) {
+	public static String base64Encode(String str) {
 		BASE64Encoder encoder = new BASE64Encoder();
 		try {
 			return encoder.encodeBuffer(str.getBytes(StandardCharsets.UTF_8));
@@ -183,7 +184,7 @@ public class BaseUtil {
 	 * @param str
 	 * @return
 	 */
-	public static String Base64Decode(String str) {
+	public static String base64Decode(String str) {
 		BASE64Decoder dec = new BASE64Decoder();
 		try {
 			byte[] b = dec.decodeBuffer(str);
@@ -212,44 +213,15 @@ public class BaseUtil {
 		// 获取实体类的所有属性，返回Field数组
 		Field[] field = model.getClass().getDeclaredFields();
 		// 遍历所有属性
-		for (int j = 0; j < field.length; j++) {
+		for (Field t : field) {
 			// 获取属性的名字
-			name = field[j].getName();
+			name = t.getName();
 			// 将属性的首字符大写，方便构造get，set方法
 			name = name.substring(0, 1).toUpperCase() + name.substring(1);
 			m = model.getClass().getMethod("get" + name);
-			map.put(field[j].getName(), m.invoke(model));
-			// 获取属性的类型
-			// type = field[j].getGenericType().toString();
+			map.put(t.getName(), m.invoke(model));
 		}
 		return map;
-	}
-
-	/**
-	 * SHA1加密
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static String getSha1(String str) {
-
-		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-		try {
-			MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
-			mdTemp.update(str.getBytes(StandardCharsets.UTF_8));
-			byte[] md = mdTemp.digest();
-			int j = md.length;
-			char buf[] = new char[j * 2];
-			int k = 0;
-			for (int i = 0; i < j; i++) {
-				byte byte0 = md[i];
-				buf[k++] = hexDigits[byte0 >>> 4 & 0xf];
-				buf[k++] = hexDigits[byte0 & 0xf];
-			}
-			return new String(buf);
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	/**

@@ -12,7 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  */
 @Configuration
 public class MvcConfig extends WebMvcConfigurationSupport {
-	// 配置拦截器
+	/**
+	 * 配置拦截器
+	 * 
+	 * @param registry
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new CorsInterceptor()).addPathPatterns("/**");

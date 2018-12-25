@@ -1,11 +1,7 @@
 package com.jmc.api.util;
 
-import com.alibaba.fastjson.JSONObject;
 import com.jmc.api.common.Page;
 import com.jmc.api.common.ReturnObj;
-import org.springframework.boot.json.JacksonJsonParser;
-
-import java.lang.reflect.Array;
 
 /**
  * @Author: mason_ge
@@ -39,9 +35,4 @@ public class ApiReturnUtil {
 		return ro;
 	}
 
-	private void convertData(Object obj){
-		if(obj instanceof Array){
-
-		}
-	}
 }

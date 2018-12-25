@@ -12,7 +12,7 @@ import com.jmc.api.entity.Bdf2User;
 import com.jmc.api.service.UserService;
 
 /**
- * @Description:
+ * @Description:人员信息接口实现
  * @Author: mason_ge
  * @Date: 16:26 2018/12/21
  */
@@ -23,17 +23,18 @@ public class UserServiceImpl extends BaseDao implements UserService {
 		Map<String, Object> conMap = new HashMap<>(0);
 		String fieldName, fieldValue, eachKey;
 		Object eachValue;
+		StringBuilder sb = new StringBuilder();
 		try {
-			String hql = "from Bdf2User t where 1=1 ";
+			sb.append("from Bdf2User t where 1=1 ");
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				eachKey = entry.getKey();
 				eachValue = entry.getValue();
 				if (!StringUtils.isEmpty(eachValue)) {
-					hql += " and t." + eachKey + " =:" + eachKey;
+					sb.append(" and t.").append(eachKey).append(" =:").append(eachKey);
 					conMap.put(eachKey, eachValue);
 				}
 			}
-			return this.queryEntity(hql, conMap);
+			return this.queryEntity(sb.toString(), conMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

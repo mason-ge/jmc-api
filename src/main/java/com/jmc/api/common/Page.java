@@ -6,13 +6,21 @@ package com.jmc.api.common;
  * @Date: 17:05 2018/12/17
  */
 public class Page {
-	// 总记录数
+	/**
+	 * 总记录数
+	 */
 	private int totalRows;
-	// 总页数
+	/**
+	 * 总页数
+	 */
 	private int totalPages;
-	// 每页显示记录数
+	/**
+	 * 每页显示记录数
+	 */
 	private int pageSize = Constants.PAGE_SIZE;
-	// 当前页数
+	/**
+	 * 当前页数
+	 */
 	private int pageNo = 1;
 
 	public int getTotalPages() {
